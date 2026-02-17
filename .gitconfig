@@ -13,5 +13,6 @@
 	cm = commit --message
 	d = diff
 	dc = diff --cached
+	g = graph
 	graph = log --all --decorate --oneline --graph
 	s = status
