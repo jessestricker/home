@@ -1,0 +1,17 @@
+[user]
+	name = Jesse Stricker
+	email = git@jessestricker.de
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[pull]
+	rebase = true
+[alias]
+	a = add
+	aa = add --all
+	cm = commit --message
+	d = diff
+	dc = diff --cached
+	graph = log --all --decorate --oneline --graph
+	s = status
