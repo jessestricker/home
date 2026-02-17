@@ -1,0 +1,56 @@
+#! /usr/bin/python3
+
+import sys
+from argparse import ArgumentParser
+from pathlib import Path
+
+ENCODING = "utf-8"
+STDIO_FILE = "-"
+EOL = "\n"
+
+
+def main() -> None:
+    parser = ArgumentParser()
+    parser.add_argument("input", nargs="?", default=STDIO_FILE)
+    output_group = parser.add_mutually_exclusive_group()
+    output_group.add_argument("-o", "--output", default=STDIO_FILE)
+    output_group.add_argument("-w", "--in-place", action="store_true")
+    args = parser.parse_args()
+
+    input_file = args.input
+    output_file = input_file if args.in_place else args.output
+
+    input = (
+        sys.stdin.read()
+        if input_file == STDIO_FILE
+        else Path(input_file).read_text(encoding=ENCODING)
+    )
+
+    output = fmt_gitignore(input)
+
+    if output_file == STDIO_FILE:
+        sys.stdout.write(output)
+    else:
+        Path(output_file).write_text(output, encoding=ENCODING)
+
+
+def fmt_gitignore(input: str) -> str:
+    lines = input.splitlines()
+
+    lines = (line.strip() for line in lines)
+    lines = (line for line in lines if line != "")
+
+    def key(line: str) -> str:
+        if line.startswith("!"):
+            line = line[1:]
+
+        line = line.lower()
+        return line
+
+    lines = sorted(lines, key=key)
+
+    return EOL.join(lines) + EOL
+
+
+if __name__ == "__main__":
+    sys.exit(main())
