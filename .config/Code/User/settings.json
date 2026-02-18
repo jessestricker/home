@@ -1,4 +1,7 @@
 {
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+  },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt",
     "editor.insertSpaces": true,
@@ -10,6 +13,9 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.languageServerMode": "full",
+  "python.analysis.typeCheckingMode": "strict",
   "redhat.telemetry.enabled": false,
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.cursorStyle": "line",
