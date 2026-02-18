@@ -27,5 +27,16 @@ fi
 alias ls='ls --color=auto --classify --group-directories-first'
 alias ll='ls --long --almost-all'
 
+# Homebrew
+if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  homebrew_setup=$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+  eval "$homebrew_setup"
+  unset homebrew_setup
+
+  for file in "/home/linuxbrew/.linuxbrew/etc/bash_completion.d/"*; do
+    source "$file"
+  done
+fi
+
 # mkdir
 alias md='mkdir --parents'
