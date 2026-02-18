@@ -1,0 +1,127 @@
+#! /usr/bin/python3
+
+import os
+import subprocess
+import sys
+from pathlib import Path
+from typing import Protocol
+
+
+class PackageManager(Protocol):
+    title: str
+
+    def is_available(self) -> bool: ...
+
+    def upgrade(self) -> None: ...
+
+    def post_upgrade(self) -> None:
+        pass
+
+
+class Apt(PackageManager):
+    title = "APT"
+    program = Path("/usr/bin/apt")
+
+    def is_available(self) -> bool:
+        return self.program.is_file()
+
+    def upgrade(self) -> None:
+        run_process(
+            self.program,
+            "upgrade",
+            "--assume-yes",
+            "--verbose-versions",
+            "--update",
+            use_sudo=True,
+        )
+
+    def post_upgrade(self) -> None:
+        reboot_required = True
+        packages_requiring_reboot = []
+        try:
+            with open("/run/reboot-required.pkgs") as f:
+                packages_requiring_reboot = sorted(f.read().splitlines())
+        except FileNotFoundError:
+            reboot_required = os.path.exists("/run/reboot-required")
+
+        if reboot_required:
+            eprint()
+            eprint_warning("A reboot is required for some system packages.")
+
+        if packages_requiring_reboot:
+            eprint("These packages are:")
+            for package in packages_requiring_reboot:
+                eprint(f"  - {package}")
+
+
+class Snap(PackageManager):
+    title = "Snap"
+    program = Path("/usr/bin/snap")
+
+    def is_available(self) -> bool:
+        return self.program.is_file()
+
+    def upgrade(self) -> None:
+        run_process(self.program, "refresh", use_sudo=True)
+
+
+class Flatpak(PackageManager):
+    title = "Flatpak"
+    program = Path("/usr/bin/flatpak")
+
+    def is_available(self) -> bool:
+        return self.program.is_file()
+
+    def upgrade(self) -> None:
+        run_process(self.program, "update", "--assumeyes", use_sudo=True)
+
+
+def main() -> None:
+    package_managers: list[PackageManager] = [
+        Apt(),
+        Snap(),
+        Flatpak(),
+    ]
+
+    for i, package_manager in enumerate(package_managers):
+        if not package_manager.is_available():
+            continue
+
+        if i > 0:
+            eprint()
+        eprint_header(package_manager.title)
+
+        package_manager.upgrade()
+
+    for package_manager in package_managers:
+        package_manager.post_upgrade()
+
+
+def run_process(*cmd: str | Path, use_sudo: bool = False) -> None:
+    args: list[str | Path] = [*cmd]
+    if use_sudo:
+        args = ["/usr/bin/sudo", "--", *args]
+    subprocess.run(args, check=True)
+
+
+BOLD = "\033[1m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+NORMAL = "\033[39m"
+RESET = "\033[m"
+
+
+def eprint_header(text: str) -> None:
+    eprint(f"{BOLD}(upper) {BLUE}==> {NORMAL}{text}{RESET}")
+
+
+def eprint_warning(text: str) -> None:
+    eprint(f"{BOLD}(upper) {YELLOW}warning: {RESET}{text}")
+
+
+def eprint(*values: object) -> None:
+    print(*values, file=sys.stderr)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
