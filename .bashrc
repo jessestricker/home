@@ -1,8 +1,8 @@
 # shellcheck shell=bash
 
 case $- in
-*i*) ;;
-*) return ;;
+  *i*) ;;
+  *) return ;;
 esac
 
 # Bash
@@ -16,11 +16,11 @@ shopt -s globstar
 PS1='\[\e[1;34m\]\w \[\e[39m\]\$ \[\e[m\]'
 
 if ! shopt -oq posix; then
-    if [[ -f /usr/share/bash-completion/bash_completion ]]; then
-        . /usr/share/bash-completion/bash_completion
-    elif [[ -f /etc/bash_completion ]]; then
-        . /etc/bash_completion
-    fi
+  if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [[ -f /etc/bash_completion ]]; then
+    . /etc/bash_completion
+  fi
 fi
 
 # ls
