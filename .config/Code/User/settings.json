@@ -15,6 +15,7 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
+  "git.confirmSync": false,
   "git.suggestSmartCommit": false,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.languageServerMode": "full",
