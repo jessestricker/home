@@ -17,8 +17,10 @@ PS1='\[\e[1;34m\]\w \[\e[39m\]\$ \[\e[m\]'
 
 if ! shopt -oq posix; then
   if [[ -f /usr/share/bash-completion/bash_completion ]]; then
+    # shellcheck source=/dev/null
     . /usr/share/bash-completion/bash_completion
   elif [[ -f /etc/bash_completion ]]; then
+    # shellcheck source=/dev/null
     . /etc/bash_completion
   fi
 fi
@@ -33,7 +35,8 @@ if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
   eval "$homebrew_setup"
   unset homebrew_setup
 
-  for file in "/home/linuxbrew/.linuxbrew/etc/bash_completion.d/"*; do
+  for file in "${HOMEBREW_PREFIX:?}/etc/bash_completion.d/"*; do
+    # shellcheck source=/dev/null
     source "$file"
   done
 fi
