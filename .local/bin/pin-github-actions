@@ -1,0 +1,59 @@
+#! /usr/bin/python3
+
+import argparse
+import functools
+import json
+import logging
+import pathlib
+import re
+import sys
+import urllib.request
+
+
+def main() -> None:
+    logging.basicConfig(level=logging.INFO)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file", help="workflow file to pin actions in")
+    args = parser.parse_args()
+
+    file = pathlib.Path(args.file)
+    text = file.read_text(encoding="utf-8")
+
+    text_with_pinned_versions = re.sub(
+        pattern=r"uses:\s+(.+)@.*",
+        repl=pin_action_version,
+        string=text,
+        flags=re.MULTILINE,
+    )
+    file.write_text(text_with_pinned_versions)
+
+
+def pin_action_version(match: re.Match[str]) -> str:
+    action = match[1]
+    tag_name = fetch_latest_release_tag_name(action)
+    commit_sha = fetch_tag_object_sha(action, tag_name)
+
+    logging.info("pin %s to %s (%s)", action, tag_name, commit_sha)
+    return f"uses: {action}@{commit_sha} # {tag_name}"
+
+
+@functools.cache
+def fetch_latest_release_tag_name(owner_and_repo: str) -> str:
+    url = f"https://api.github.com/repos/{owner_and_repo}/releases/latest"
+    with urllib.request.urlopen(url) as f:
+        data = json.load(f)
+
+    return data["tag_name"]
+
+
+@functools.cache
+def fetch_tag_object_sha(owner_and_repo: str, tag_name: str) -> str:
+    url = f"https://api.github.com/repos/{owner_and_repo}/git/refs/tags/{tag_name}"
+    with urllib.request.urlopen(url) as f:
+        data = json.load(f)
+
+    return data["object"]["sha"]
+
+
+if __name__ == "__main__":
+    sys.exit(main())
