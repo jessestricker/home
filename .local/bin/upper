@@ -65,6 +65,18 @@ class Snap(PackageManager):
         run_process(self.program, "refresh", use_sudo=True)
 
 
+class Homebrew(PackageManager):
+    title = "Homebrew"
+    program = Path("/home/linuxbrew/.linuxbrew/bin/brew")
+
+    def is_available(self) -> bool:
+        return self.program.is_file()
+
+    def upgrade(self) -> None:
+        run_process(self.program, "update")
+        run_process(self.program, "upgrade")
+
+
 class Flatpak(PackageManager):
     title = "Flatpak"
     program = Path("/usr/bin/flatpak")
@@ -80,6 +92,7 @@ def main() -> None:
     package_managers: list[PackageManager] = [
         Apt(),
         Snap(),
+        Homebrew(),
         Flatpak(),
     ]
 
