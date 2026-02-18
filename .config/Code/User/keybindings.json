@@ -31,16 +31,6 @@
   },
   {
     "key": "ctrl+alt+l",
-    "command": "editor.action.formatSelection",
-    "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly",
-  },
-  {
-    "key": "ctrl+k ctrl+f",
-    "command": "-editor.action.formatSelection",
-    "when": "editorHasDocumentSelectionFormattingProvider && editorTextFocus && !editorReadonly",
-  },
-  {
-    "key": "ctrl+alt+l",
     "command": "notebook.format",
     "when": "notebookEditable && !editorTextFocus && activeEditor == 'workbench.editor.notebook'",
   },
@@ -58,11 +48,6 @@
     "key": "ctrl+shift+k",
     "command": "-editor.action.deleteLines",
     "when": "textInputFocus && !editorReadonly",
-  },
-  {
-    "key": "ctrl+y",
-    "command": "-chatEditor.action.acceptHunk",
-    "when": "chatEdits.cursorInChangeRange && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.cursorInChangeRange && chatEdits.hasEditorModifications && notebookCellListFocused && !chatEdits.isCurrentlyBeingModified",
   },
   {
     "key": "ctrl+y",
@@ -97,5 +82,10 @@
     "key": "ctrl+shift+a",
     "command": "-editor.action.blockComment",
     "when": "editorTextFocus && !editorReadonly",
+  },
+  {
+    "key": "ctrl+y",
+    "command": "-chatEditor.action.acceptHunk",
+    "when": "chatEdits.cursorInChangeRange && chatEdits.hasEditorModifications && editorFocus && !chatEdits.isCurrentlyBeingModified || chatEdits.cursorInChangeRange && chatEdits.hasEditorModifications && notebookCellListFocused && !chatEdits.isCurrentlyBeingModified"
   },
 ]
