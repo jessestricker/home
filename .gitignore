@@ -27,6 +27,8 @@
 /.config/systemd/user/
 /.config/tiling-assistant/tiledSessionRestore2.json
 /.config/ubuntu-insights/
+/.config/user-dirs.dirs
+/.config/user-dirs.locale
 /.dotnet/corefx/cryptography/crls/
 /.gnupg/
 /.gradle/
