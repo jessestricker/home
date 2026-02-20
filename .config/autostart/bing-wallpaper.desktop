@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Bing Wallpaper
+Exec=/home/jesse/Pictures/get_bing_wallpaper.py
+Path=/home/jesse/Pictures
+Terminal=false
