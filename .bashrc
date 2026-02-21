@@ -36,6 +36,7 @@ __git_complete home __git_main
 
 # Homebrew
 if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  export HOMEBREW_NO_ENV_HINTS=1
   homebrew_setup=$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
   eval "$homebrew_setup"
   unset homebrew_setup
