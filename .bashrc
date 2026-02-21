@@ -29,6 +29,11 @@ fi
 alias ls='ls --color=auto --classify --group-directories-first'
 alias ll='ls --long --almost-all'
 
+# home
+# shellcheck source=/dev/null
+source /usr/share/bash-completion/completions/git
+__git_complete home __git_main
+
 # Homebrew
 if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
   homebrew_setup=$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
