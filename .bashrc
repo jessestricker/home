@@ -47,5 +47,12 @@ if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
   done
 fi
 
+# fnm, requires Homebrew
+if command -v fnm >/dev/null; then
+  fnm_setup="$(fnm env --shell bash)"
+  eval "$fnm_setup"
+  unset fnm_setup
+fi
+
 # mkdir
 alias md='mkdir --parents'
