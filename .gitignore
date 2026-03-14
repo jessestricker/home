@@ -46,6 +46,8 @@
 /.local/state/
 /.node_repl_history
 /.npm/
+/.nvm/*
+!/.nvm/default-packages
 /.pam_environment
 /.pki/nssdb/
 /.python_history

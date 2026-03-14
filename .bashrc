@@ -54,5 +54,14 @@ if command -v fnm >/dev/null; then
   unset fnm_setup
 fi
 
+# nvm, requires Homebrew
+if [[ -f "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh" ]]; then
+  export NVM_DIR="$HOME/.nvm"
+  # shellcheck source=/dev/null
+  source "${HOMEBREW_PREFIX}/opt/nvm/nvm.sh"
+  # shellcheck source=/dev/null
+  source "${HOMEBREW_PREFIX}/opt/nvm/etc/bash_completion.d/nvm"
+fi
+
 # mkdir
 alias md='mkdir --parents'
