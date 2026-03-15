@@ -36,6 +36,7 @@ __git_complete home __git_main
 
 # Homebrew
 if [[ -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+  export HOMEBREW_BUNDLE_DUMP_NO_FLATPAK=1
   export HOMEBREW_BUNDLE_DUMP_NO_GO=1
   export HOMEBREW_NO_ENV_HINTS=1
 
