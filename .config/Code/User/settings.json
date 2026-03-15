@@ -1,10 +1,19 @@
 {
+  "[github-actions-workflow]": {
+    "editor.tabSize": 2,
+  },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
   },
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt",
     "editor.insertSpaces": true,
+  },
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -16,7 +25,7 @@
   "files.trimTrailingWhitespace": true,
   "git.autofetch": true,
   "git.confirmSync": false,
-  "git.suggestSmartCommit": false,
+  "git.enableSmartCommit": true,
   "python.analysis.autoImportCompletions": true,
   "python.analysis.languageServerMode": "full",
   "python.analysis.typeCheckingMode": "strict",
@@ -24,8 +33,11 @@
   "telemetry.telemetryLevel": "off",
   "terminal.integrated.cursorStyle": "line",
   "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.fontSize": 17,
+  "terminal.integrated.initialHint": false,
   "terminal.integrated.stickyScroll.enabled": false,
   "window.autoDetectColorScheme": true,
+  "workbench.editor.empty.hint": "hidden",
   "workbench.preferredDarkColorTheme": "GitHub Dark Default",
   "workbench.preferredLightColorTheme": "GitHub Light Default",
   "workbench.settings.editor": "json",
