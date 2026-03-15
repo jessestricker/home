@@ -37,6 +37,7 @@
 /.config/user-dirs.locale
 /.config/uv/uv-receipt.json
 /.config/xdg-terminals.list
+/.config/yelp/
 /.dotnet/corefx/cryptography/crls/
 /.gnupg/
 /.gradle/
@@ -52,6 +53,9 @@
 /.pki/nssdb/
 /.python_history
 /.ssh/
+/.steam/
+/.steampath
+/.steampid
 /.sudo_as_admin_successful
 /.terraform.d/
 /.var/
