@@ -3,6 +3,7 @@
 import os
 import subprocess
 import sys
+from argparse import ArgumentParser
 from pathlib import Path
 from typing import Protocol
 
@@ -89,6 +90,13 @@ class Flatpak(PackageManager):
 
 
 def main() -> None:
+    parser = ArgumentParser()
+    parser.add_argument("--debug", action="store_true", help="print debug information")
+    args = parser.parse_args()
+    if args.debug:
+        global debug_print_enabled
+        debug_print_enabled = True
+
     package_managers: list[PackageManager] = [
         Apt(),
         Snap(),
@@ -111,17 +119,22 @@ def main() -> None:
 
 
 def run_process(*cmd: str | Path, use_sudo: bool = False) -> None:
-    args: list[str | Path] = [*cmd]
+    args: list[str] = [str(arg) for arg in cmd]
     if use_sudo:
         args = ["/usr/bin/sudo", "--", *args]
+
+    eprint_debug(f"running {args}")
     subprocess.run(args, check=True)
 
 
 BOLD = "\033[1m"
+DIM = "\033[2m"
 YELLOW = "\033[33m"
 BLUE = "\033[34m"
 NORMAL = "\033[39m"
 RESET = "\033[m"
+
+debug_print_enabled = False
 
 
 def eprint_header(text: str) -> None:
@@ -130,6 +143,10 @@ def eprint_header(text: str) -> None:
 
 def eprint_warning(text: str) -> None:
     eprint(f"{BOLD}(upper) {YELLOW}warning: {RESET}{text}")
+
+
+def eprint_debug(text: str) -> None:
+    eprint(f"{DIM}(upper) debug: {text}{RESET}")
 
 
 def eprint(*values: object) -> None:
