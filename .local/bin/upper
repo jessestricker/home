@@ -146,6 +146,9 @@ def eprint_warning(text: str) -> None:
 
 
 def eprint_debug(text: str) -> None:
+    if not debug_print_enabled:
+        return
+
     eprint(f"{DIM}(upper) debug: {text}{RESET}")
 
 
