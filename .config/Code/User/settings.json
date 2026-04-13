@@ -1,5 +1,14 @@
 {
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-containers",
+  },
   "[github-actions-workflow]": {
+    "editor.tabSize": 2,
+  },
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+  },
+  "[javascript]": {
     "editor.tabSize": 2,
   },
   "[python]": {
@@ -8,6 +17,7 @@
   "[shellscript]": {
     "editor.defaultFormatter": "mkhl.shfmt",
     "editor.insertSpaces": true,
+    "editor.tabSize": 2,
   },
   "[terraform]": {
     "editor.defaultFormatter": "hashicorp.terraform",
@@ -15,12 +25,17 @@
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
+  "[typescript]": {
+    "editor.tabSize": 2,
+  },
+  "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "JetBrains Mono NL",
   "editor.fontSize": 15,
   "editor.lineHeight": 1.4,
   "editor.minimap.enabled": false,
+  "explorer.confirmDragAndDrop": false,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
@@ -40,7 +55,7 @@
   "window.autoDetectColorScheme": true,
   "window.zoomLevel": 1,
   "workbench.editor.empty.hint": "hidden",
-  "workbench.preferredDarkColorTheme": "GitHub Dark Default",
+  "workbench.preferredDarkColorTheme": "GitHub Dark Dimmed",
   "workbench.preferredLightColorTheme": "GitHub Light Default",
   "workbench.settings.editor": "json",
   "workbench.tree.indent": 16,
