@@ -68,3 +68,7 @@ fi
 
 # mkdir
 alias md='mkdir --parents'
+
+# pnpm
+alias npm-check-updates='pnpx npm-check-updates'
+alias projen='pnpx projen'
