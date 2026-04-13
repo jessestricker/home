@@ -30,6 +30,7 @@
 /.config/org.gnome.Ptyxis/session.gvariant
 /.config/pulse/cookie
 /.config/systemd/user/
+/.config/teamviewer/
 /.config/tiling-assistant/tiledSessionRestore2.json
 /.config/ubuntu-insights/
 /.config/ubuntu-xdg-terminals.list
