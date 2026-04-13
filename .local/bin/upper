@@ -86,7 +86,7 @@ class Flatpak(PackageManager):
         return self.program.is_file()
 
     def upgrade(self) -> None:
-        run_process(self.program, "update", "--assumeyes", use_sudo=True)
+        run_process(self.program, "update", "--assumeyes")
 
 
 def main() -> None:
